@@ -2,6 +2,7 @@ package kodlama.io.Devs.business.concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.config.PlaceholderConfigurerSupport;
 import org.springframework.stereotype.Service;
 
 import kodlama.io.Devs.business.abstracts.ProgrammingLanguageService;
@@ -25,10 +26,11 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
     @Override
     public ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) throws Exception {
+        if (programmingLanguage.getName().isBlank()) {
+            throw new Exception("İsim Boş Olamaz");
+        }
         for (ProgrammingLanguage p : programmingLanguageRepository.getAll()) {
-            if (programmingLanguage.getName().isBlank()) {
-                throw new Exception("İsim Boş Olamaz");
-            }
+            
             if (p.getName().equalsIgnoreCase(programmingLanguage.getName())) {
                 throw new Exception("İsim Tekrarlanamaz");
             }
@@ -39,13 +41,15 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
     @Override
     public void delete(int id) throws Exception {
-        for (ProgrammingLanguage programmingLanguage : programmingLanguageRepository.getAll()) {
-            if (id == programmingLanguage.getId()) {
-                programmingLanguageRepository.delete(id);
+        
+        ProgrammingLanguage pLanguageToDelete = getById(id);
+
+            if (id == pLanguageToDelete.getId()) {
+                programmingLanguageRepository.delete(pLanguageToDelete);
             }
-
-        }
-
+            
+        
+        
     }
 
     @Override

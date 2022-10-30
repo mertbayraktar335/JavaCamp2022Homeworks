@@ -36,8 +36,8 @@ public class InMemoryProgrammingLanguageRepository implements ProgrammingLanguag
     }
 
     @Override
-    public void delete(int id) throws Exception {
-        pLanguages.remove(id);
+    public void delete(ProgrammingLanguage programmingLanguage) throws Exception {
+        pLanguages.remove(programmingLanguage);
     }
 
     @Override

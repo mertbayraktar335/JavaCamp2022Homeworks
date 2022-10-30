@@ -10,7 +10,7 @@ public interface ProgrammingLanguageRepository {
 
     ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) throws Exception;
 
-    void delete(int id) throws Exception;
+    void delete(ProgrammingLanguage programmingLanguage) throws Exception;
 
     ProgrammingLanguage getById(int id) throws Exception;
 
