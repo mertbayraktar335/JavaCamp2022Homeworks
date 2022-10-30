@@ -30,52 +30,28 @@ public class InMemoryProgrammingLanguageRepository implements ProgrammingLanguag
 
     @Override
     public ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) throws Exception {
-        for (ProgrammingLanguage p : pLanguages) {
-            if (programmingLanguage.getName().isBlank()) {
-                throw new Exception("İsim Boş Olamaz");
-            }
-            if (p.getName().equalsIgnoreCase(programmingLanguage.getName())) {
-                throw new Exception("İsim Tekrarlanamaz");
-            }
-
-        }
+        
         pLanguages.add(programmingLanguage);
         return programmingLanguage;
     }
 
     @Override
     public void delete(int id) throws Exception {
-        for (ProgrammingLanguage programmingLanguage : pLanguages) {
-            if (id == programmingLanguage.getId()) {
-                pLanguages.remove(programmingLanguage);
-            }
-
-        }
-
+        pLanguages.remove(id);
     }
 
     @Override
-    public ProgrammingLanguage getById(int id)throws Exception {
+    public ProgrammingLanguage getById(int id) {
 
-        for (ProgrammingLanguage programmingLanguage : pLanguages) {
-            if (id == programmingLanguage.getId()) {
-                return programmingLanguage;
-
-            }
-
-        }
-        return null;
+        return pLanguages.get(id);
+        
+         
     }
 
     @Override
-    public void update(ProgrammingLanguage programmingLanguage) {
-        int index = 0;
-		for (int i = 0; i < pLanguages.size(); i++) {
-			if (pLanguages.get(i).getId() == programmingLanguage.getId()) {
-				index = i;
-			}
-		}
-		pLanguages.set(index, programmingLanguage);
+    public void update(ProgrammingLanguage programmingLanguage,int id) {
+       ProgrammingLanguage pLanguage = getById(id);
+       pLanguage.setName(programmingLanguage.getName());
     }
 
         

@@ -25,26 +25,44 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
     @Override
     public ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) throws Exception {
+        for (ProgrammingLanguage p : programmingLanguageRepository.getAll()) {
+            if (programmingLanguage.getName().isBlank()) {
+                throw new Exception("İsim Boş Olamaz");
+            }
+            if (p.getName().equalsIgnoreCase(programmingLanguage.getName())) {
+                throw new Exception("İsim Tekrarlanamaz");
+            }
 
+        }
         return programmingLanguageRepository.add(programmingLanguage);
     }
 
     @Override
     public void delete(int id) throws Exception {
-        programmingLanguageRepository.delete(id);
+        for (ProgrammingLanguage programmingLanguage : programmingLanguageRepository.getAll()) {
+            if (id == programmingLanguage.getId()) {
+                programmingLanguageRepository.delete(id);
+            }
+
+        }
 
     }
 
     @Override
     public ProgrammingLanguage getById(int id) throws Exception {
+        for (ProgrammingLanguage programmingLanguage : programmingLanguageRepository.getAll()) {
+            if (id == programmingLanguage.getId()) {
+                return programmingLanguage;
 
+            }
+
+        }
         return programmingLanguageRepository.getById(id);
     }
 
     @Override
-    public void update(ProgrammingLanguage programmingLanguage) {
-         programmingLanguageRepository.update(programmingLanguage);
+    public void update(ProgrammingLanguage programmingLanguage, int id) {
+        programmingLanguageRepository.update(programmingLanguage, id);
     }
 
-    
 }
