@@ -14,6 +14,6 @@ public interface ProgrammingLanguageRepository {
 
     ProgrammingLanguage getById(int id) throws Exception;
 
-    void update(ProgrammingLanguage programmingLanguage);
+    void update(ProgrammingLanguage programmingLanguage,int id);
 
 }
