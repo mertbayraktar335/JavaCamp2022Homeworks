@@ -45,7 +45,7 @@ public class ProgrammingLanguagesController {
 
     @PutMapping("/update")
 
-    public void update(ProgrammingLanguage programmingLanguage,int id) {
+    public void update(ProgrammingLanguage programmingLanguage,int id)throws Exception {
         programmingLanguageService.update(programmingLanguage,id);
     }
 

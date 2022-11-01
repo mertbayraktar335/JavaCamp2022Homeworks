@@ -14,7 +14,7 @@ public interface ProgrammingLanguageService {
 
     ProgrammingLanguage getById(int id) throws Exception;
 
-    void update(ProgrammingLanguage programmingLanguage,int id);
+    void update(ProgrammingLanguage programmingLanguage,int id)throws Exception;
 
    
 }

@@ -59,7 +59,11 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
     }
 
     @Override
-    public void update(ProgrammingLanguage programmingLanguage, int id) {
+    public void update(ProgrammingLanguage programmingLanguage, int id)throws Exception {
+        if(!isIdExist(id)){
+            throw new Exception("ID BULUNAMADI");
+
+        }
         programmingLanguageRepository.update(programmingLanguage, id);
     }
 
