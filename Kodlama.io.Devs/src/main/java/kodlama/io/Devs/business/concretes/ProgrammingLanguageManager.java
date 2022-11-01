@@ -2,8 +2,9 @@ package kodlama.io.Devs.business.concretes;
 
 import java.util.List;
 
-import org.springframework.beans.factory.config.PlaceholderConfigurerSupport;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.base.ParserMinimalBase;
 
 import kodlama.io.Devs.business.abstracts.ProgrammingLanguageService;
 import kodlama.io.Devs.dataAccess.abstracts.ProgrammingLanguageRepository;
@@ -26,47 +27,66 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
     @Override
     public ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) throws Exception {
-        if (programmingLanguage.getName().isBlank()) {
-            throw new Exception("İsim Boş Olamaz");
+        if (isIdExist(programmingLanguage.getId())) {
+            throw new Exception("ID MEVCUT");
         }
-        for (ProgrammingLanguage p : programmingLanguageRepository.getAll()) {
-            
-            if (p.getName().equalsIgnoreCase(programmingLanguage.getName())) {
-                throw new Exception("İsim Tekrarlanamaz");
-            }
+        if (!isNameValid(programmingLanguage.getName())) {
+            throw new Exception("İsim alanı boş veya sistemdeki isimle aynı");
+        }
 
-        }
         return programmingLanguageRepository.add(programmingLanguage);
     }
 
     @Override
     public void delete(int id) throws Exception {
-        
-        ProgrammingLanguage pLanguageToDelete = getById(id);
 
-            if (id == pLanguageToDelete.getId()) {
-                programmingLanguageRepository.delete(pLanguageToDelete);
-            }
-            
-        
-        
+        ProgrammingLanguage pLanguageToDelete = getById(id);
+        if (!isIdExist(pLanguageToDelete.getId())) {
+            throw new Exception("ID MEVCUT DEĞİL");
+        }
+        programmingLanguageRepository.delete(pLanguageToDelete);
+
     }
 
     @Override
     public ProgrammingLanguage getById(int id) throws Exception {
-        for (ProgrammingLanguage programmingLanguage : programmingLanguageRepository.getAll()) {
-            if (id == programmingLanguage.getId()) {
-                return programmingLanguage;
 
-            }
-
+        if (!isIdExist(id)) {
+            throw new Exception("ID BULUNAMADI");
         }
         return programmingLanguageRepository.getById(id);
+
     }
 
     @Override
     public void update(ProgrammingLanguage programmingLanguage, int id) {
         programmingLanguageRepository.update(programmingLanguage, id);
+    }
+
+    private boolean isIdExist(int id) {
+        for (ProgrammingLanguage pLanguage : getAll()) {
+            if (pLanguage.getId() == id) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private boolean isNameValid(String name) throws Exception {
+        if (name.isBlank()) {
+            return false;
+        }
+        for (ProgrammingLanguage p : programmingLanguageRepository.getAll()) {
+
+            if (name.equalsIgnoreCase(p.getName())) {
+
+                return false;
+
+            }
+
+        }
+        return true;
     }
 
 }

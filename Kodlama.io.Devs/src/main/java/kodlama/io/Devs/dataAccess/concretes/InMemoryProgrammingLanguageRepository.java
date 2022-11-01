@@ -29,21 +29,21 @@ public class InMemoryProgrammingLanguageRepository implements ProgrammingLanguag
     }
 
     @Override
-    public ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) throws Exception {
+    public ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) {
         
         pLanguages.add(programmingLanguage);
         return programmingLanguage;
     }
 
     @Override
-    public void delete(ProgrammingLanguage programmingLanguage) throws Exception {
+    public void delete(ProgrammingLanguage programmingLanguage)  {
         pLanguages.remove(programmingLanguage);
     }
 
     @Override
     public ProgrammingLanguage getById(int id) {
 
-        return pLanguages.get(id);
+        return pLanguages.get(id-1);
         
          
     }

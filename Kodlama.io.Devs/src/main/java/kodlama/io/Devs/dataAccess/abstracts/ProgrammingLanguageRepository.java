@@ -8,9 +8,9 @@ public interface ProgrammingLanguageRepository {
 
     List<ProgrammingLanguage> getAll();
 
-    ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) throws Exception;
+    ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) ;
 
-    void delete(ProgrammingLanguage programmingLanguage) throws Exception;
+    void delete(ProgrammingLanguage programmingLanguage) ;
 
     ProgrammingLanguage getById(int id) throws Exception;
 
