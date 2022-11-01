@@ -28,7 +28,7 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
     @Override
     public ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) throws Exception {
         if (isIdExist(programmingLanguage.getId())) {
-            throw new Exception("ID MEVCUT");
+            throw new Exception("ID BULUNAMADI");
         }
         if (!isNameValid(programmingLanguage.getName())) {
             throw new Exception("İsim alanı boş veya sistemdeki isimle aynı");
