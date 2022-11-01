@@ -42,7 +42,7 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
         ProgrammingLanguage pLanguageToDelete = getById(id);
         if (!isIdExist(pLanguageToDelete.getId())) {
-            throw new Exception("ID MEVCUT DEĞİL");
+            throw new Exception("ID BULUNAMADI");
         }
         programmingLanguageRepository.delete(pLanguageToDelete);
 
